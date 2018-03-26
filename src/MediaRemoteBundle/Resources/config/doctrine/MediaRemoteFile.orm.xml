@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="MediaRemoteBundle\Entity\MediaRemoteFile" table="media_remote_file">
+    <indexes>
+      <index name="remote_id" columns="remote_id,media_id"/>
+      <index name="media_id" columns="media_id"/>
+      <index name="IDX_FE0EE85A2A3E9C94" columns="remote_id"/>
+    </indexes>
+    <id name="mediaRemoteFileId" type="integer" column="media_remote_file_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="mediaRemoteFileName" type="string" column="media_remote_file_name" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="mediaRemoteFileDescr" type="string" column="media_remote_file_descr" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="mediaRemoteFileBasepath" type="string" column="media_remote_file_basepath" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="mediaRemoteFilePath" type="string" column="media_remote_file_path" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="media" target-entity="Media" fetch="LAZY">
+      <join-columns>
+        <join-column name="media_id" referenced-column-name="media_id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="remote" target-entity="Remote" fetch="LAZY">
+      <join-columns>
+        <join-column name="remote_id" referenced-column-name="remote_id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

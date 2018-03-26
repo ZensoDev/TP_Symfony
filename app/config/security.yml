@@ -1,0 +1,41 @@
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
+security:
+
+    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    providers:
+        in_memory:
+            memory:
+              users:
+                owner:
+                  password: $2y$12$dPCYSTKLdOeEPffHKDL9jelMKRF.uzSGsUk9ARmWDDba6m797VXR. #Azerty123
+                  roles: ROLE_SUPER_ADMIN
+                maintener:
+                  password: $2y$12$j9LvOM57ZZjVCdcmgVY3c.Hx59YLvu9IZUrH0Qbv7Yo4FIqEl7qBa #foo
+                  roles: ROLE_ADMIN
+
+    encoders:
+            Symfony\Component\Security\Core\User\User:
+              algorithm: bcrypt
+              cost: 12
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            anonymous: ~
+            # activate different ways to authenticate
+
+            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+            http_basic: ~
+
+            # https://symfony.com/doc/current/security/form_login_setup.html
+            #form_login: ~
+
+    role_hierarchy:
+                ROLE_SUPER_ADMIN: [ROLE_ADMIN]
+
+    access_control:
+#            - { path: ^/remote, roles: ROLE_ADMIN }
